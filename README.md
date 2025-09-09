@@ -1,1 +1,1 @@
-ecotrade carbon : https://ecotrade-carbon-offs-zjg6.bolt.host
+ecotrade carbon : https://aquamarine-arithmetic-a4447e.netlify.app
