@@ -358,15 +358,15 @@ export function Dashboard() {
               </div>
               <div>
                 <p className="text-sm text-gray-600">Credits Owned</p>
-                <p className="text-2xl font-bold text-gray-900">{profile?.credits_owned || 0}</p>
+                <p className="text-2xl font-bold text-gray-900">{profile?.credits_owned || 0} units</p>
               </div>
             </div>
           </div>
           
           <div className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-3">
-              <div className="bg-blue-100 rounded-lg p-2">
-                <TrendingUp className="h-6 w-6 text-blue-600" />
+              <div className="bg-teal/10 rounded-lg p-2">
+                <TrendingUp className="h-6 w-6 text-teal" />
               </div>
               <div>
                 <p className="text-sm text-gray-600">CO₂ Offset (tons)</p>
@@ -377,8 +377,8 @@ export function Dashboard() {
           
           <div className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-3">
-              <div className="bg-purple-100 rounded-lg p-2">
-                <Award className="h-6 w-6 text-purple-600" />
+              <div className="bg-royal-blue/10 rounded-lg p-2">
+                <Award className="h-6 w-6 text-royal-blue" />
               </div>
               <div>
                 <p className="text-sm text-gray-600">Badges Earned</p>
@@ -389,8 +389,8 @@ export function Dashboard() {
           
           <div className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-3">
-              <div className="bg-orange-100 rounded-lg p-2">
-                <Calculator className="h-6 w-6 text-orange-600" />
+              <div className="bg-saffron/10 rounded-lg p-2">
+                <Calculator className="h-6 w-6 text-saffron" />
               </div>
               <div>
                 <p className="text-sm text-gray-600">Transactions</p>
@@ -419,7 +419,7 @@ export function Dashboard() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`py-4 px-2 border-b-2 font-medium text-sm capitalize transition-colors flex items-center space-x-2 ${
                       activeTab === tab.id
-                        ? 'border-green-500 text-green-600'
+                        ? 'border-saffron text-saffron'
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -443,7 +443,7 @@ export function Dashboard() {
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Line type="monotone" dataKey="cumulative" stroke="#16a34a" strokeWidth={3} />
+                        <Line type="monotone" dataKey="cumulative" stroke="#FF9933" strokeWidth={3} />
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
@@ -556,17 +556,17 @@ export function Dashboard() {
                               </span>
                             </p>
                             <p className="text-gray-600">
-                              Price per credit: <span className="font-medium text-green-600">
-                                ${projects.find(p => p.id === selectedProject)?.price_per_credit}
+                              Price per credit: <span className="font-medium text-saffron">
+                                ₹{projects.find(p => p.id === selectedProject)?.price_per_credit}
                               </span>
                             </p>
                             <p className="text-gray-600">
-                              Total Cost: <span className="font-bold text-green-600 text-lg">
-                                ${(projects.find(p => p.id === selectedProject)?.price_per_credit || 0) * quantity}
+                              Total Cost: <span className="font-bold text-saffron text-lg">
+                                ₹{(projects.find(p => p.id === selectedProject)?.price_per_credit || 0) * quantity}
                               </span>
                             </p>
                             <p className="text-gray-600">
-                              CO₂ Offset: <span className="font-medium text-green-600">
+                              CO₂ Offset: <span className="font-medium text-teal">
                                 {quantity} tons
                               </span>
                             </p>
@@ -577,7 +577,7 @@ export function Dashboard() {
                       <button
                         onClick={handleBuyCredits}
                         disabled={!selectedProject || quantity <= 0 || loading}
-                        className="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                        className="w-full bg-gradient-to-r from-saffron to-orange-500 text-white py-3 px-6 rounded-lg font-semibold hover:from-orange-500 hover:to-red-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 transform hover:scale-105"
                       >
                         {loading ? (
                           <>
@@ -607,10 +607,10 @@ export function Dashboard() {
                           </div>
                           <p className="text-sm text-gray-600 mb-3">{project.description}</p>
                           <div className="flex justify-between items-center">
-                            <span className="text-green-600 font-bold text-lg">${project.price_per_credit}/credit</span>
+                            <span className="text-saffron font-bold text-lg">₹{project.price_per_credit}/credit</span>
                             <button
                               onClick={() => setSelectedProject(project.id)}
-                              className="text-green-600 hover:text-green-700 font-medium text-sm"
+                              className="text-saffron hover:text-orange-600 font-medium text-sm transition-colors duration-300"
                             >
                               Select Project
                             </button>
@@ -639,7 +639,7 @@ export function Dashboard() {
                     </p>
                     <button
                       onClick={() => setActiveTab('buy')}
-                      className="bg-green-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors"
+                      className="bg-gradient-to-r from-saffron to-orange-500 text-white px-6 py-2 rounded-lg font-medium hover:from-orange-500 hover:to-red-500 transition-all duration-300 transform hover:scale-105"
                     >
                       Buy Credits First
                     </button>
@@ -732,12 +732,12 @@ export function Dashboard() {
                               </p>
                               <p className="text-gray-600">
                                 Price per credit: <span className="font-medium text-blue-600">
-                                  ${sellPrice}
+                                  ₹{sellPrice}
                                 </span>
                               </p>
                               <p className="text-gray-600">
                                 Total Value: <span className="font-bold text-blue-600 text-lg">
-                                  ${(sellPrice * sellQuantity).toFixed(2)}
+                                  ₹{(sellPrice * sellQuantity).toFixed(2)}
                                 </span>
                               </p>
                             </div>
@@ -747,7 +747,7 @@ export function Dashboard() {
                         <button
                           onClick={handleSellCredits}
                           disabled={!selectedSellProject || sellQuantity <= 0 || sellPrice <= 0 || loading}
-                          className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                          className="w-full bg-gradient-to-r from-teal to-cyan-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 transform hover:scale-105"
                         >
                           {loading ? (
                             <>
@@ -778,7 +778,7 @@ export function Dashboard() {
                             <p className="text-sm text-gray-600 mb-3">{credit.project.description}</p>
                             <div className="flex justify-between items-center">
                               <span className="text-gray-500 text-sm">
-                                Market: ${credit.project.price_per_credit}/credit
+                                Market: ₹{credit.project.price_per_credit}/credit
                               </span>
                               <button
                                 onClick={() => {
@@ -833,18 +833,18 @@ export function Dashboard() {
                         <div className="space-y-2 mb-4">
                           <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Price per credit:</span>
-                            <span className="font-medium">${order.price_per_credit}</span>
+                            <span className="font-medium">₹{order.price_per_credit}</span>
                           </div>
                           <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Total value:</span>
-                            <span className="font-bold text-lg text-green-600">${order.total_value}</span>
+                            <span className="font-bold text-lg text-saffron">₹{order.total_value}</span>
                           </div>
                         </div>
                         
                         <button
                           onClick={() => handleBuyFromMarketplace(order)}
                           disabled={loading || order.seller_id === user?.id}
-                          className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full bg-gradient-to-r from-royal-blue to-indigo-600 text-white py-2 px-4 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
                         >
                           {order.seller_id === user?.id ? 'Your Listing' : 'Buy Now'}
                         </button>
@@ -902,8 +902,8 @@ export function Dashboard() {
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <span className={`px-2 py-1 text-xs rounded-full font-medium ${
                                   transaction.type === 'buy' 
-                                    ? 'bg-green-100 text-green-800' 
-                                    : 'bg-blue-100 text-blue-800'
+                                    ? 'bg-saffron/10 text-saffron' 
+                                    : 'bg-teal/10 text-teal'
                                 }`}>
                                   {transaction.type.toUpperCase()}
                                 </span>
@@ -912,7 +912,7 @@ export function Dashboard() {
                                 {transaction.quantity} credits
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                ${transaction.total_cost}
+                                ₹{transaction.total_cost}
                               </td>
                             </tr>
                           ))}
@@ -937,7 +937,7 @@ export function Dashboard() {
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Bar dataKey="offset" fill="#16a34a" />
+                        <Bar dataKey="offset" fill="#FF9933" />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -945,22 +945,22 @@ export function Dashboard() {
                   <div className="space-y-4">
                     <h4 className="font-medium">Impact Equivalents</h4>
                     <div className="space-y-3">
-                      <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                        <div className="text-2xl font-bold text-green-600">
+                      <div className="p-4 bg-saffron/10 rounded-lg border border-saffron/20">
+                        <div className="text-2xl font-bold text-saffron">
                           {Math.round((profile?.total_co2_offset || 0) * 2.5)}
                         </div>
                         <div className="text-sm text-gray-600">Trees planted equivalent</div>
                       </div>
                       
-                      <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <div className="text-2xl font-bold text-blue-600">
+                      <div className="p-4 bg-teal/10 rounded-lg border border-teal/20">
+                        <div className="text-2xl font-bold text-teal">
                           {Math.round((profile?.total_co2_offset || 0) * 2600)}
                         </div>
                         <div className="text-sm text-gray-600">Miles driven offset</div>
                       </div>
                       
-                      <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-                        <div className="text-2xl font-bold text-purple-600">
+                      <div className="p-4 bg-royal-blue/10 rounded-lg border border-royal-blue/20">
+                        <div className="text-2xl font-bold text-royal-blue">
                           {Math.round((profile?.total_co2_offset || 0) * 1200)}
                         </div>
                         <div className="text-sm text-gray-600">kWh of clean energy</div>
