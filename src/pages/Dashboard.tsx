@@ -358,7 +358,7 @@ export function Dashboard() {
               </div>
               <div>
                 <p className="text-sm text-gray-600">Credits Owned</p>
-                <p className="text-2xl font-bold text-gray-900">{profile?.credits_owned || 0} units</p>
+                <p className="text-2xl font-bold text-gray-900">{profile?.credits_owned || 0} credits</p>
               </div>
             </div>
           </div>
@@ -557,12 +557,12 @@ export function Dashboard() {
                             </p>
                             <p className="text-gray-600">
                               Price per credit: <span className="font-medium text-saffron">
-                                ₹{projects.find(p => p.id === selectedProject)?.price_per_credit}
+                                ₹{projects.find(p => p.id === selectedProject)?.price_per_credit?.toLocaleString('en-IN')}
                               </span>
                             </p>
                             <p className="text-gray-600">
                               Total Cost: <span className="font-bold text-saffron text-lg">
-                                ₹{(projects.find(p => p.id === selectedProject)?.price_per_credit || 0) * quantity}
+                                ₹{((projects.find(p => p.id === selectedProject)?.price_per_credit || 0) * quantity).toLocaleString('en-IN')}
                               </span>
                             </p>
                             <p className="text-gray-600">
@@ -607,7 +607,7 @@ export function Dashboard() {
                           </div>
                           <p className="text-sm text-gray-600 mb-3">{project.description}</p>
                           <div className="flex justify-between items-center">
-                            <span className="text-saffron font-bold text-lg">₹{project.price_per_credit}/credit</span>
+                            <span className="text-saffron font-bold text-lg">₹{project.price_per_credit.toLocaleString('en-IN')}/credit</span>
                             <button
                               onClick={() => setSelectedProject(project.id)}
                               className="text-saffron hover:text-orange-600 font-medium text-sm transition-colors duration-300"
@@ -732,12 +732,12 @@ export function Dashboard() {
                               </p>
                               <p className="text-gray-600">
                                 Price per credit: <span className="font-medium text-blue-600">
-                                  ₹{sellPrice}
+                                  ₹{sellPrice.toLocaleString('en-IN')}
                                 </span>
                               </p>
                               <p className="text-gray-600">
                                 Total Value: <span className="font-bold text-blue-600 text-lg">
-                                  ₹{(sellPrice * sellQuantity).toFixed(2)}
+                                  ₹{(sellPrice * sellQuantity).toLocaleString('en-IN')}
                                 </span>
                               </p>
                             </div>
@@ -778,7 +778,7 @@ export function Dashboard() {
                             <p className="text-sm text-gray-600 mb-3">{credit.project.description}</p>
                             <div className="flex justify-between items-center">
                               <span className="text-gray-500 text-sm">
-                                Market: ₹{credit.project.price_per_credit}/credit
+                                Market: ₹{credit.project.price_per_credit.toLocaleString('en-IN')}/credit
                               </span>
                               <button
                                 onClick={() => {
@@ -833,11 +833,11 @@ export function Dashboard() {
                         <div className="space-y-2 mb-4">
                           <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Price per credit:</span>
-                            <span className="font-medium">₹{order.price_per_credit}</span>
+                            <span className="font-medium">₹{order.price_per_credit.toLocaleString('en-IN')}</span>
                           </div>
                           <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Total value:</span>
-                            <span className="font-bold text-lg text-saffron">₹{order.total_value}</span>
+                            <span className="font-bold text-lg text-saffron">₹{order.total_value.toLocaleString('en-IN')}</span>
                           </div>
                         </div>
                         
@@ -912,7 +912,7 @@ export function Dashboard() {
                                 {transaction.quantity} credits
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                ₹{transaction.total_cost}
+                                ₹{transaction.total_cost.toLocaleString('en-IN')}
                               </td>
                             </tr>
                           ))}
@@ -947,21 +947,21 @@ export function Dashboard() {
                     <div className="space-y-3">
                       <div className="p-4 bg-saffron/10 rounded-lg border border-saffron/20">
                         <div className="text-2xl font-bold text-saffron">
-                          {Math.round((profile?.total_co2_offset || 0) * 2.5)}
+                          {Math.round((profile?.total_co2_offset || 0) * 2.5).toLocaleString('en-IN')}
                         </div>
                         <div className="text-sm text-gray-600">Trees planted equivalent</div>
                       </div>
                       
                       <div className="p-4 bg-teal/10 rounded-lg border border-teal/20">
                         <div className="text-2xl font-bold text-teal">
-                          {Math.round((profile?.total_co2_offset || 0) * 2600)}
+                          {Math.round((profile?.total_co2_offset || 0) * 2600).toLocaleString('en-IN')}
                         </div>
                         <div className="text-sm text-gray-600">Miles driven offset</div>
                       </div>
                       
                       <div className="p-4 bg-royal-blue/10 rounded-lg border border-royal-blue/20">
                         <div className="text-2xl font-bold text-royal-blue">
-                          {Math.round((profile?.total_co2_offset || 0) * 1200)}
+                          {Math.round((profile?.total_co2_offset || 0) * 1200).toLocaleString('en-IN')}
                         </div>
                         <div className="text-sm text-gray-600">kWh of clean energy</div>
                       </div>
