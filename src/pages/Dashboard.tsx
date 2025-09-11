@@ -458,10 +458,10 @@ export function Dashboard() {
                           cy="50%"
                           outerRadius={80}
                           dataKey="value"
-                          label={({ name, value }) => ${name}: ${value}}
+                          label={({ name, value }) => `${name}: ${value}`}
                         >
                           {transactionTypeData.map((entry, index) => (
-                            <Cell key={cell-${index}} fill={entry.color} />
+                            <Cell key={`cell-${index}`} fill={entry.color} />
                           ))}
                         </Pie>
                         <Tooltip />
