@@ -163,7 +163,7 @@ export function Dashboard() {
       setSelectedProject('')
       await loadProfile()
       await loadTransactions()
-      showNotification('success', Successfully purchased ${quantity} carbon credits!)
+      showNotification('success', `Successfully purchased ${quantity} carbon credits!`)
     } catch (error) {
       showNotification('error', 'Failed to purchase credits. Please try again.')
     }
