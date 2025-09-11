@@ -224,7 +224,7 @@ export function Dashboard() {
       await loadProfile()
       await loadTransactions()
       await loadSaleOrders()
-      showNotification('success', Successfully listed ${sellQuantity} credits for sale!)
+      showNotification('success', `Successfully listed ${sellQuantity} credits for sale!`)
     } catch (error) {
       showNotification('error', 'Failed to list credits for sale. Please try again.')
     }
