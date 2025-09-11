@@ -271,7 +271,7 @@ export function Dashboard() {
       await loadProfile()
       await loadTransactions()
       await loadSaleOrders()
-      showNotification('success', Successfully purchased ${saleOrder.quantity} credits from marketplace!)
+      showNotification('success', `Successfully purchased ${saleOrder.quantity} credits from marketplace!`)
     } catch (error) {
       showNotification('error', 'Failed to complete purchase. Please try again.')
     }
