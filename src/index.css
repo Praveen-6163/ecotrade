@@ -91,6 +91,26 @@
   }
 }
 
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes assistantBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 /* Animation classes */
 .animate-float {
   animation: float 4s ease-in-out infinite;
@@ -118,6 +138,14 @@
 
 .animate-welcome-pulse {
   animation: welcomePulse 2s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.animate-assistant-bounce {
+  animation: assistantBounce 2s ease-in-out infinite;
 }
 
 /* Enhanced base styling */
@@ -164,6 +192,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--saffron);
+}
+
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
 }
 
 /* Enhanced loading animation */
