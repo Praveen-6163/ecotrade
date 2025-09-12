@@ -69,6 +69,28 @@
   }
 }
 
+@keyframes welcomeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes welcomePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(255, 153, 51, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(255, 153, 51, 0.7);
+  }
+}
+
 /* Animation classes */
 .animate-float {
   animation: float 4s ease-in-out infinite;
@@ -88,6 +110,14 @@
 
 .animate-fade-scale {
   animation: fadeInScale 0.5s ease-out;
+}
+
+.animate-welcome-slide {
+  animation: welcomeSlideIn 0.8s ease-out;
+}
+
+.animate-welcome-pulse {
+  animation: welcomePulse 2s ease-in-out infinite;
 }
 
 /* Enhanced base styling */
@@ -314,7 +344,9 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
   .animate-float-delayed,
-  .animate-pulse-glow {
+  .animate-pulse-glow,
+  .animate-welcome-slide,
+  .animate-welcome-pulse {
     animation: none;
   }
   
@@ -326,5 +358,13 @@ body {
   .btn-hover:hover,
   .card-hover:hover {
     transform: none;
+  }
+  
+  .motion-reduce\:hidden {
+    display: none !important;
+  }
+  
+  .motion-reduce\:block {
+    display: block !important;
   }
 }

@@ -3,6 +3,7 @@ import { User, CreditCard, TrendingUp, Award, Calculator, ShoppingCart, DollarSi
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
+import { WelcomeAnimation } from '../components/WelcomeAnimation'
 
 interface Profile {
   id: string
@@ -49,6 +50,8 @@ interface SaleOrder {
 export function Dashboard() {
   const { user } = useAuth()
   const [profile, setProfile] = useState<Profile | null>(null)
+  const [showWelcomeAnimation, setShowWelcomeAnimation] = useState(false)
+  const [isFirstLogin, setIsFirstLogin] = useState(false)
   const [projects, setProjects] = useState<Project[]>([])
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [saleOrders, setSaleOrders] = useState<SaleOrder[]>([])
@@ -63,12 +66,29 @@ export function Dashboard() {
 
   useEffect(() => {
     if (user) {
+      checkFirstLogin()
       loadProfile()
       loadProjects()
       loadTransactions()
       loadSaleOrders()
     }
   }, [user])
+
+  const checkFirstLogin = () => {
+    const lastLoginKey = `lastLogin_${user?.id}`
+    const lastLogin = localStorage.getItem(lastLoginKey)
+    const now = new Date().getTime()
+    
+    if (!lastLogin || now - parseInt(lastLogin) > 24 * 60 * 60 * 1000) { // 24 hours
+      setIsFirstLogin(true)
+      setShowWelcomeAnimation(true)
+      localStorage.setItem(lastLoginKey, now.toString())
+    }
+  }
+
+  const handleWelcomeComplete = () => {
+    setShowWelcomeAnimation(false)
+  }
 
   const showNotification = (type: 'success' | 'error' | 'info', message: string) => {
     setNotification({ type, message })
@@ -325,7 +345,14 @@ export function Dashboard() {
   const userCredits = getUserCreditsByProject()
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <>
+      {showWelcomeAnimation && profile && (
+        <WelcomeAnimation 
+          userName={profile.name} 
+          onComplete={handleWelcomeComplete}
+        />
+      )}
+      <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
@@ -973,6 +1000,7 @@ export function Dashboard() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }
