@@ -102,6 +102,21 @@
   }
 }
 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
+  }
+}
+
 @keyframes assistantBounce {
   0%, 100% {
     transform: translateY(0);
@@ -122,6 +137,14 @@
 
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
 }
 
 .animate-slide-up {
@@ -154,7 +177,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', 'Poppins', 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--light-cream);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -172,6 +195,15 @@ body {
 
 .bg-royal-gradient {
   background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-light) 50%, #5C6BC0 100%);
+}
+
+/* New premium gradients */
+.bg-eco-gradient {
+  background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
+}
+
+.bg-nature-gradient {
+  background: linear-gradient(135deg, #059669 0%, #0891b2 50%, #1d4ed8 100%);
 }
 
 /* Enhanced custom scrollbar */
@@ -200,6 +232,19 @@ body {
 
 .shadow-4xl {
   box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.25);
+}
+
+/* Premium glassmorphism effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-card-dark {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Enhanced loading animation */
