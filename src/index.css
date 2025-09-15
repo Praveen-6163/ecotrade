@@ -198,6 +198,10 @@ body {
   box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
 }
 
+.shadow-4xl {
+  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.25);
+}
+
 /* Enhanced loading animation */
 .loading-dots {
   display: inline-flex;

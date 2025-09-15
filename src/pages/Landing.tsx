@@ -50,7 +50,7 @@ export function Landing() {
               of CO₂ from the atmosphere. Join India's premier marketplace for verified carbon offsets 
               from renewable energy, reforestation, and clean technology projects across Bharat.
             </p>
-            
+
             {/* CTA buttons with enhanced styling */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
               <Link
