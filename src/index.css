@@ -184,6 +184,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Remove any unwanted horizontal lines */
+hr {
+  display: none !important;
+}
+
+.hero-subtitle::after,
+.hero-subtitle::before,
+p::after,
+p::before {
+  display: none !important;
+}
+
+/* Ensure no border-bottom on text elements */
+.hero-subtitle,
+.hero-subtitle p,
+section p {
+  border-bottom: none !important;
+  text-decoration: none !important;
+  border: none !important;
+}
+
 /* Enhanced Indian-inspired gradient backgrounds */
 .bg-saffron-gradient {
   background: linear-gradient(135deg, var(--saffron) 0%, var(--saffron-dark) 50%, #FF6B35 100%);
