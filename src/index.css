@@ -185,24 +185,53 @@ body {
 }
 
 /* Remove any unwanted horizontal lines */
-hr {
-  display: none !important;
-}
-
+/* Completely remove all horizontal lines and borders */
+hr,
 .hero-subtitle::after,
 .hero-subtitle::before,
 p::after,
-p::before {
+p::before,
+section::after,
+section::before,
+.hero-section::after,
+.hero-section::before {
   display: none !important;
+  content: none !important;
+  border: none !important;
+  background: none !important;
+  height: 0 !important;
+  width: 0 !important;
 }
 
-/* Ensure no border-bottom on text elements */
+/* Remove all borders and decorations from text elements */
 .hero-subtitle,
 .hero-subtitle p,
-section p {
-  border-bottom: none !important;
-  text-decoration: none !important;
+section p,
+.hero-section,
+.hero-section p,
+.hero-section .hero-subtitle {
   border: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  text-decoration: none !important;
+  background-image: none !important;
+  background: transparent !important;
+}
+
+/* Target any gradient lines specifically */
+*[class*="gradient"]::after,
+*[class*="gradient"]::before,
+*[class*="hero"]::after,
+*[class*="hero"]::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Remove any decorative bottom borders */
+.decorative-elements,
+.absolute.bottom-0,
+.absolute.bottom-0.left-0 {
+  display: none !important;
 }
 
 /* Enhanced Indian-inspired gradient backgrounds */
