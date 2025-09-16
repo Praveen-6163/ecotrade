@@ -78,7 +78,8 @@ export default {
         'glow-saffron': '0 0 20px rgba(255, 153, 51, 0.3)',
         'glow-teal': '0 0 20px rgba(0, 102, 102, 0.3)',
         'glow-royal': '0 0 20px rgba(26, 35, 126, 0.3)',
-    },
-  },
+          },
+      },
+  }
   plugins: [],
 };
