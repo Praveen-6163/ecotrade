@@ -69,63 +69,6 @@
   }
 }
 
-@keyframes welcomeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes welcomePulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 30px rgba(255, 153, 51, 0.4);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 50px rgba(255, 153, 51, 0.7);
-  }
-}
-
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
-  }
-}
-
-@keyframes assistantBounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
 /* Animation classes */
 .animate-float {
   animation: float 4s ease-in-out infinite;
@@ -139,14 +82,6 @@
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
-.animate-shake {
-  animation: shake 0.5s ease-in-out;
-}
-
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
 .animate-slide-up {
   animation: slideInUp 0.6s ease-out;
 }
@@ -155,83 +90,17 @@
   animation: fadeInScale 0.5s ease-out;
 }
 
-.animate-welcome-slide {
-  animation: welcomeSlideIn 0.8s ease-out;
-}
-
-.animate-welcome-pulse {
-  animation: welcomePulse 2s ease-in-out infinite;
-}
-
-.animate-twinkle {
-  animation: twinkle 2s ease-in-out infinite;
-}
-
-.animate-assistant-bounce {
-  animation: assistantBounce 2s ease-in-out infinite;
-}
-
 /* Enhanced base styling */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Inter', 'Poppins', 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--light-cream);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Remove any unwanted horizontal lines */
-/* Completely remove all horizontal lines and borders */
-hr,
-.hero-subtitle::after,
-.hero-subtitle::before,
-p::after,
-p::before,
-section::after,
-section::before,
-.hero-section::after,
-.hero-section::before {
-  display: none !important;
-  content: none !important;
-  border: none !important;
-  background: none !important;
-  height: 0 !important;
-  width: 0 !important;
-}
-
-/* Remove all borders and decorations from text elements */
-.hero-subtitle,
-.hero-subtitle p,
-section p,
-.hero-section,
-.hero-section p,
-.hero-section .hero-subtitle {
-  border: none !important;
-  border-bottom: none !important;
-  border-top: none !important;
-  text-decoration: none !important;
-  background-image: none !important;
-  background: transparent !important;
-}
-
-/* Target any gradient lines specifically */
-*[class*="gradient"]::after,
-*[class*="gradient"]::before,
-*[class*="hero"]::after,
-*[class*="hero"]::before {
-  display: none !important;
-  content: none !important;
-}
-
-/* Remove any decorative bottom borders */
-.decorative-elements,
-.absolute.bottom-0,
-.absolute.bottom-0.left-0 {
-  display: none !important;
 }
 
 /* Enhanced Indian-inspired gradient backgrounds */
@@ -245,15 +114,6 @@ section p,
 
 .bg-royal-gradient {
   background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-light) 50%, #5C6BC0 100%);
-}
-
-/* New premium gradients */
-.bg-eco-gradient {
-  background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
-}
-
-.bg-nature-gradient {
-  background: linear-gradient(135deg, #059669 0%, #0891b2 50%, #1d4ed8 100%);
 }
 
 /* Enhanced custom scrollbar */
@@ -274,27 +134,6 @@ section p,
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--saffron);
-}
-
-.shadow-3xl {
-  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
-}
-
-.shadow-4xl {
-  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.25);
-}
-
-/* Premium glassmorphism effects */
-.glass-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.glass-card-dark {
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Enhanced loading animation */
@@ -475,9 +314,7 @@ section p,
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
   .animate-float-delayed,
-  .animate-pulse-glow,
-  .animate-welcome-slide,
-  .animate-welcome-pulse {
+  .animate-pulse-glow {
     animation: none;
   }
   
@@ -489,13 +326,5 @@ section p,
   .btn-hover:hover,
   .card-hover:hover {
     transform: none;
-  }
-  
-  .motion-reduce\:hidden {
-    display: none !important;
-  }
-  
-  .motion-reduce\:block {
-    display: block !important;
   }
 }

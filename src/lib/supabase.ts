@@ -1,9 +1,19 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+let supabaseClient;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn("Supabase credentials are missing! Please define VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your environment variables. Using placeholder client to prevent page crash.");
+  // Use placeholder values to avoid createClient throwing a runtime error
+  supabaseClient = createClient("https://placeholder-url.supabase.co", "placeholder-anon-key");
+} else {
+  supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+}
+
+export const supabase = supabaseClient;
 
 export type Database = {
   public: {

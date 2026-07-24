@@ -11,6 +11,9 @@ export function useAuth() {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
       setLoading(false)
+    }).catch(err => {
+      console.error("Failed to retrieve initial user session:", err)
+      setLoading(false)
     })
 
     // Listen for auth changes
