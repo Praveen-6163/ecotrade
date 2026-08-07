@@ -311,8 +311,8 @@ export function Dashboard() {
   })).reverse()
 
   const transactionTypeData = [
-    { name: 'Purchases', value: transactions.filter(t => t.type === 'buy').length, color: '#16a34a' },
-    { name: 'Sales', value: transactions.filter(t => t.type === 'sell').length, color: '#2563eb' }
+    { name: 'Purchases', value: transactions.filter(t => t.type === 'buy').length, color: '#FF9933' },
+    { name: 'Sales', value: transactions.filter(t => t.type === 'sell').length, color: '#006666' }
   ]
 
   const badges = [
@@ -325,85 +325,89 @@ export function Dashboard() {
   const userCredits = getUserCreditsByProject()
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-cream-50 py-10 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Welcome back, {profile?.name}!</h1>
-          <p className="text-gray-600">Manage your carbon credits and track your environmental impact</p>
+        <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
+              Welcome back, <span className="text-gradient-saffron">{profile?.name}</span>!
+            </h1>
+            <p className="text-gray-600 mt-2 font-medium">Manage your carbon credits and track your environmental impact across Bharat</p>
+          </div>
         </div>
 
         {/* Notification */}
         {notification && (
-          <div className={`mb-6 p-4 rounded-lg border-l-4 ${
-            notification.type === 'success' ? 'bg-green-50 border-green-400 text-green-700' :
-            notification.type === 'error' ? 'bg-red-50 border-red-400 text-red-700' :
-            'bg-blue-50 border-blue-400 text-blue-700'
+          <div className={`mb-8 p-5 rounded-2xl border-l-4 shadow-soft animate-slide-up ${
+            notification.type === 'success' ? 'bg-green-50 border-green-500 text-green-800' :
+            notification.type === 'error' ? 'bg-red-50 border-red-500 text-red-800' :
+            'bg-blue-50 border-blue-500 text-blue-800'
           }`}>
-            <div className="flex items-center">
-              {notification.type === 'success' && <CheckCircle className="h-5 w-5 mr-2" />}
-              {notification.type === 'error' && <AlertCircle className="h-5 w-5 mr-2" />}
-              {notification.type === 'info' && <Info className="h-5 w-5 mr-2" />}
-              {notification.message}
+            <div className="flex items-center font-semibold">
+              {notification.type === 'success' && <CheckCircle className="h-6 w-6 mr-3 text-green-500" />}
+              {notification.type === 'error' && <AlertCircle className="h-6 w-6 mr-3 text-red-500" />}
+              {notification.type === 'info' && <Info className="h-6 w-6 mr-3 text-blue-500" />}
+              <span>{notification.message}</span>
             </div>
           </div>
         )}
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
-            <div className="flex items-center space-x-3">
-              <div className="bg-green-100 rounded-lg p-2">
-                <CreditCard className="h-6 w-6 text-green-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-soft border border-saffron/10 hover:border-saffron/30 hover:shadow-strong transition-all duration-300 card-hover">
+            <div className="flex items-center space-x-4">
+              <div className="bg-saffron/10 rounded-xl p-3 shadow-glow-saffron">
+                <CreditCard className="h-7 w-7 text-saffron animate-pulse" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Credits Owned</p>
-                <p className="text-2xl font-bold text-gray-900">{profile?.credits_owned || 0} credits</p>
+                <p className="text-sm font-semibold text-gray-500">Credits Owned</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{profile?.credits_owned || 0} credits</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
-            <div className="flex items-center space-x-3">
-              <div className="bg-teal/10 rounded-lg p-2">
-                <TrendingUp className="h-6 w-6 text-teal" />
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-soft border border-teal/10 hover:border-teal/30 hover:shadow-strong transition-all duration-300 card-hover">
+            <div className="flex items-center space-x-4">
+              <div className="bg-teal/10 rounded-xl p-3 shadow-glow-teal">
+                <TrendingUp className="h-7 w-7 text-teal" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">CO₂ Offset (tons)</p>
-                <p className="text-2xl font-bold text-gray-900">{profile?.total_co2_offset || 0}</p>
+                <p className="text-sm font-semibold text-gray-500">CO₂ Offset (tons)</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{profile?.total_co2_offset || 0}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
-            <div className="flex items-center space-x-3">
-              <div className="bg-royal-blue/10 rounded-lg p-2">
-                <Award className="h-6 w-6 text-royal-blue" />
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-soft border border-royal-blue/10 hover:border-royal-blue/30 hover:shadow-strong transition-all duration-300 card-hover">
+            <div className="flex items-center space-x-4">
+              <div className="bg-royal-blue/10 rounded-xl p-3 shadow-glow-royal">
+                <Award className="h-7 w-7 text-royal-blue" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Badges Earned</p>
-                <p className="text-2xl font-bold text-gray-900">{badges.filter(b => b.condition).length}</p>
+                <p className="text-sm font-semibold text-gray-500">Badges Earned</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{badges.filter(b => b.condition).length}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
-            <div className="flex items-center space-x-3">
-              <div className="bg-saffron/10 rounded-lg p-2">
-                <Calculator className="h-6 w-6 text-saffron" />
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-soft border border-saffron/10 hover:border-saffron/30 hover:shadow-strong transition-all duration-300 card-hover">
+            <div className="flex items-center space-x-4">
+              <div className="bg-saffron-50 rounded-xl p-3">
+                <Calculator className="h-7 w-7 text-saffron-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Transactions</p>
-                <p className="text-2xl font-bold text-gray-900">{transactions.length}</p>
+                <p className="text-sm font-semibold text-gray-500">Transactions</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{transactions.length}</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-white rounded-xl shadow-sm border mb-8">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-6">
+        <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-strong border border-saffron/10 mb-10 overflow-hidden animate-fade-scale">
+          <div className="border-b border-gray-100 bg-gray-50/50">
+            <nav className="flex flex-wrap gap-2 md:gap-6 px-6 py-2">
               {[
                 { id: 'overview', label: 'Overview', icon: TrendingUp },
                 { id: 'buy', label: 'Buy Credits', icon: ShoppingCart },
@@ -413,17 +417,18 @@ export function Dashboard() {
                 { id: 'impact', label: 'Impact', icon: Award }
               ].map((tab) => {
                 const Icon = tab.icon
+                const isActive = activeTab === tab.id
                 return (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`py-4 px-2 border-b-2 font-medium text-sm capitalize transition-colors flex items-center space-x-2 ${
-                      activeTab === tab.id
-                        ? 'border-saffron text-saffron'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    className={`py-3.5 px-4 my-1.5 rounded-xl font-bold text-sm transition-all duration-300 flex items-center space-x-2.5 ${
+                      isActive
+                        ? 'bg-saffron-gradient text-white shadow-glow-saffron'
+                        : 'text-gray-600 hover:text-saffron hover:bg-saffron/5'
                     }`}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-4.5 w-4.5" />
                     <span>{tab.label}</span>
                   </button>
                 )
@@ -431,145 +436,181 @@ export function Dashboard() {
             </nav>
           </div>
 
-          <div className="p-6">
+          <div className="p-8">
             {activeTab === 'overview' && (
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">CO₂ Offset Progress</h3>
+              <div className="space-y-8 animate-fade-scale">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-soft">
+                    <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
+                      <span className="w-2.5 h-6 bg-saffron rounded-full inline-block"></span>
+                      <span>CO₂ Offset Progress (Cumulative)</span>
+                    </h3>
                     <ResponsiveContainer width="100%" height={300}>
-                      <LineChart data={chartData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Line type="monotone" dataKey="cumulative" stroke="#FF9933" strokeWidth={3} />
+                      <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                        <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} />
+                        <YAxis stroke="#888888" fontSize={12} tickLine={false} />
+                        <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #FF9933', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }} />
+                        <Line type="monotone" dataKey="cumulative" stroke="url(#saffronGradient)" strokeWidth={4} activeDot={{ r: 8 }} dot={{ strokeWidth: 2, r: 4 }} />
+                        <defs>
+                          <linearGradient id="saffronGradient" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#FF9933" />
+                            <stop offset="100%" stopColor="#FF6B35" />
+                          </linearGradient>
+                        </defs>
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
                   
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">Transaction Distribution</h3>
+                  <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-soft">
+                    <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
+                      <span className="w-2.5 h-6 bg-teal rounded-full inline-block"></span>
+                      <span>Transaction Distribution</span>
+                    </h3>
                     <ResponsiveContainer width="100%" height={300}>
                       <PieChart>
                         <Pie
                           data={transactionTypeData}
                           cx="50%"
                           cy="50%"
-                          outerRadius={80}
+                          innerRadius={60}
+                          outerRadius={90}
+                          paddingAngle={5}
                           dataKey="value"
                           label={({ name, value }) => `${name}: ${value}`}
                         >
                           {transactionTypeData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
+                            <Cell key={`cell-${index}`} fill={entry.color} style={{ outline: 'none' }} />
                           ))}
                         </Pie>
-                        <Tooltip />
+                        <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #E0FFFC', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }} />
                       </PieChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Your Badges</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {badges.map((badge, index) => (
-                      <div
-                        key={index}
-                        className={`p-4 rounded-lg border-2 text-center transition-all ${
-                          badge.condition
-                            ? 'border-green-200 bg-green-50 transform hover:scale-105'
-                            : 'border-gray-200 bg-gray-50 opacity-50'
-                        }`}
-                      >
-                        <div className="text-3xl mb-2">{badge.icon}</div>
-                        <div className="font-medium text-sm">{badge.name}</div>
-                        {badge.condition && (
-                          <div className="text-xs text-green-600 mt-1">Earned!</div>
-                        )}
-                      </div>
-                    ))}
+                  <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
+                    <span className="w-2.5 h-6 bg-royal-blue rounded-full inline-block"></span>
+                    <span>Your Achievements & Badges</span>
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    {badges.map((badge, index) => {
+                      const colors = [
+                        { active: 'border-green-200 bg-gradient-to-br from-green-50 to-emerald-50 text-green-900 shadow-glow-teal', inactive: 'border-gray-100 bg-gray-50/50 opacity-40' },
+                        { active: 'border-saffron-200 bg-gradient-to-br from-saffron-50 to-orange-50 text-saffron-900 shadow-glow-saffron', inactive: 'border-gray-100 bg-gray-50/50 opacity-40' },
+                        { active: 'border-teal-200 bg-gradient-to-br from-teal-50 to-cyan-50 text-teal-900 shadow-glow-teal', inactive: 'border-gray-100 bg-gray-50/50 opacity-40' },
+                        { active: 'border-indigo-200 bg-gradient-to-br from-indigo-50 to-royal-blue-50 text-royal-blue-900 shadow-glow-royal', inactive: 'border-gray-100 bg-gray-50/50 opacity-40' }
+                      ]
+                      const currentTheme = colors[index % colors.length]
+                      return (
+                        <div
+                          key={index}
+                          className={`p-6 rounded-2xl border-2 text-center transition-all duration-500 card-hover ${
+                            badge.condition ? currentTheme.active + ' transform hover:-translate-y-2' : currentTheme.inactive
+                          }`}
+                        >
+                          <div className="text-4xl mb-3 animate-float-delayed">{badge.icon}</div>
+                          <div className="font-extrabold text-base tracking-tight">{badge.name}</div>
+                          {badge.condition ? (
+                            <div className="text-xs font-bold mt-2 uppercase tracking-wider text-green-600 bg-green-100/60 py-1 px-2.5 rounded-full inline-block">
+                              Unlocked
+                            </div>
+                          ) : (
+                            <div className="text-xs font-semibold mt-2 uppercase tracking-wider text-gray-400 bg-gray-100 py-1 px-2.5 rounded-full inline-block">
+                              Locked
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               </div>
             )}
 
             {activeTab === 'buy' && (
-              <div className="space-y-6">
-                <div className="flex items-center space-x-2 mb-4">
-                  <ShoppingCart className="h-6 w-6 text-green-600" />
-                  <h3 className="text-lg font-semibold">Buy Carbon Credits</h3>
+              <div className="space-y-8 animate-fade-scale">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className="bg-saffron/10 p-2.5 rounded-xl">
+                    <ShoppingCart className="h-6 w-6 text-saffron" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Buy Carbon Credits</h3>
                 </div>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div className="space-y-6">
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Info className="h-5 w-5 text-blue-600" />
-                        <h4 className="font-medium text-blue-900">How it works</h4>
+                    <div className="bg-gradient-to-br from-cream-50 to-orange-50/50 p-5 rounded-2xl border border-saffron/20 shadow-soft">
+                      <div className="flex items-center space-x-2.5 mb-2.5">
+                        <Info className="h-5 w-5 text-saffron-600" />
+                        <h4 className="font-bold text-saffron-900">How it works</h4>
                       </div>
-                      <p className="text-sm text-blue-700">
-                        Purchase verified carbon credits from environmental projects. Each credit represents 1 ton of CO₂ offset.
+                      <p className="text-sm text-gray-700 leading-relaxed font-medium">
+                        Purchase verified carbon credits directly from certified environmental initiatives. Each carbon credit represents 1 metric ton of CO₂ offset from the atmosphere.
                       </p>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-5">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-bold text-gray-700 mb-2">
                           Select Project *
                         </label>
                         <select
                           value={selectedProject}
                           onChange={(e) => setSelectedProject(e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus-ring outline-none transition-all duration-300 bg-white"
                         >
                           <option value="">Choose a project...</option>
                           {projects.map((project) => (
                             <option key={project.id} value={project.id}>
-                              {project.name} - ${project.price_per_credit}/credit
+                              {project.name} - ₹{project.price_per_credit.toLocaleString('en-IN')}/credit
                             </option>
                           ))}
                         </select>
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Quantity (credits) *
+                        <label className="block text-sm font-bold text-gray-700 mb-2">
+                          Quantity (credits/tons) *
                         </label>
                         <input
                           type="number"
                           min="1"
                           value={quantity}
                           onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus-ring outline-none transition-all duration-300"
                           placeholder="Enter quantity"
                         />
                       </div>
                       
                       {selectedProject && (
-                        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                          <h4 className="font-medium text-green-900 mb-2">Purchase Summary</h4>
-                          <div className="space-y-1 text-sm">
-                            <p className="text-gray-600">
-                              Project: <span className="font-medium text-gray-900">
+                        <div className="bg-saffron-50/80 backdrop-blur-sm p-5 rounded-2xl border border-saffron-200/60 shadow-soft">
+                          <h4 className="font-bold text-saffron-900 mb-3 text-base">Purchase Summary</h4>
+                          <div className="space-y-2 text-sm font-medium">
+                            <div className="flex justify-between border-b border-saffron/10 pb-1.5">
+                              <span className="text-gray-600">Project:</span>
+                              <span className="text-gray-900 font-bold">
                                 {projects.find(p => p.id === selectedProject)?.name}
                               </span>
-                            </p>
-                            <p className="text-gray-600">
-                              Price per credit: <span className="font-medium text-saffron">
+                            </div>
+                            <div className="flex justify-between border-b border-saffron/10 pb-1.5">
+                              <span className="text-gray-600">Price per credit:</span>
+                              <span className="text-saffron-700 font-bold">
                                 ₹{projects.find(p => p.id === selectedProject)?.price_per_credit?.toLocaleString('en-IN')}
                               </span>
-                            </p>
-                            <p className="text-gray-600">
-                              Total Cost: <span className="font-bold text-saffron text-lg">
+                            </div>
+                            <div className="flex justify-between border-b border-saffron/10 pb-1.5">
+                              <span className="text-gray-600">CO₂ Offset equivalent:</span>
+                              <span className="text-teal font-bold">
+                                {quantity} tons of CO₂
+                              </span>
+                            </div>
+                            <div className="flex justify-between pt-1">
+                              <span className="text-gray-900 font-bold text-base">Total Cost:</span>
+                              <span className="text-saffron font-extrabold text-xl">
                                 ₹{((projects.find(p => p.id === selectedProject)?.price_per_credit || 0) * quantity).toLocaleString('en-IN')}
                               </span>
-                            </p>
-                            <p className="text-gray-600">
-                              CO₂ Offset: <span className="font-medium text-teal">
-                                {quantity} tons
-                              </span>
-                            </p>
+                            </div>
                           </div>
                         </div>
                       )}
@@ -577,17 +618,17 @@ export function Dashboard() {
                       <button
                         onClick={handleBuyCredits}
                         disabled={!selectedProject || quantity <= 0 || loading}
-                        className="w-full bg-gradient-to-r from-saffron to-orange-500 text-white py-3 px-6 rounded-lg font-semibold hover:from-orange-500 hover:to-red-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 transform hover:scale-105"
+                        className="w-full bg-saffron-gradient text-white py-4 px-6 rounded-xl font-bold shadow-medium hover:shadow-strong transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 transform hover:scale-105 btn-hover"
                       >
                         {loading ? (
                           <>
                             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                            <span>Processing...</span>
+                            <span>Processing Transaction...</span>
                           </>
                         ) : (
                           <>
                             <ShoppingCart className="h-5 w-5" />
-                            <span>Purchase Credits</span>
+                            <span>Purchase Credits Now</span>
                           </>
                         )}
                       </button>
@@ -595,24 +636,27 @@ export function Dashboard() {
                   </div>
                   
                   <div className="space-y-4">
-                    <h4 className="font-medium text-gray-900">Available Projects</h4>
-                    <div className="space-y-4 max-h-96 overflow-y-auto">
+                    <h4 className="font-bold text-gray-900 text-lg flex items-center space-x-2">
+                      <span className="w-2 h-4 bg-saffron rounded-full inline-block"></span>
+                      <span>Available Projects</span>
+                    </h4>
+                    <div className="space-y-4 max-h-128 overflow-y-auto pr-2">
                       {projects.map((project) => (
-                        <div key={project.id} className="p-4 border rounded-lg hover:border-green-300 transition-colors">
+                        <div key={project.id} className="p-5 bg-white border border-gray-100 rounded-2xl shadow-soft hover:border-saffron/30 transition-all duration-300 card-hover">
                           <div className="flex justify-between items-start mb-2">
-                            <h5 className="font-semibold text-gray-900">{project.name}</h5>
-                            <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                            <h5 className="font-bold text-gray-900 text-base">{project.name}</h5>
+                            <span className="bg-saffron/10 text-saffron-800 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
                               {project.type}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-600 mb-3">{project.description}</p>
-                          <div className="flex justify-between items-center">
-                            <span className="text-saffron font-bold text-lg">₹{project.price_per_credit.toLocaleString('en-IN')}/credit</span>
+                          <p className="text-sm text-gray-600 mb-4 leading-relaxed font-medium">{project.description}</p>
+                          <div className="flex justify-between items-center pt-2 border-t border-gray-50">
+                            <span className="text-saffron font-extrabold text-lg">₹{project.price_per_credit.toLocaleString('en-IN')}/credit</span>
                             <button
                               onClick={() => setSelectedProject(project.id)}
-                              className="text-saffron hover:text-orange-600 font-medium text-sm transition-colors duration-300"
+                              className="bg-saffron/10 text-saffron hover:bg-saffron hover:text-white px-4 py-2 rounded-xl font-bold text-sm transition-all duration-300"
                             >
-                              Select Project
+                              Select
                             </button>
                           </div>
                         </div>
@@ -624,48 +668,56 @@ export function Dashboard() {
             )}
 
             {activeTab === 'sell' && (
-              <div className="space-y-6">
-                <div className="flex items-center space-x-2 mb-4">
-                  <DollarSign className="h-6 w-6 text-blue-600" />
-                  <h3 className="text-lg font-semibold">Sell Carbon Credits</h3>
+              <div className="space-y-8 animate-fade-scale">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className="bg-teal/10 p-2.5 rounded-xl">
+                    <DollarSign className="h-6 w-6 text-teal" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Sell Carbon Credits</h3>
                 </div>
 
                 {userCredits.length === 0 ? (
-                  <div className="text-center py-12">
-                    <CreditCard className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">No Credits to Sell</h3>
-                    <p className="text-gray-600 mb-4">
-                      You need to purchase carbon credits before you can sell them.
+                  <div className="text-center py-16 bg-white rounded-3xl border border-gray-100 shadow-soft">
+                    <CreditCard className="h-20 w-20 text-gray-300 mx-auto mb-4 animate-float" />
+                    <h3 className="text-2xl font-extrabold text-gray-900 mb-2">No Credits Available to Sell</h3>
+                    <p className="text-gray-600 mb-6 font-medium max-w-md mx-auto">
+                      You must purchase carbon credits from a certified project before listing them for trade in the marketplace.
                     </p>
                     <button
                       onClick={() => setActiveTab('buy')}
-                      className="bg-gradient-to-r from-saffron to-orange-500 text-white px-6 py-2 rounded-lg font-medium hover:from-orange-500 hover:to-red-500 transition-all duration-300 transform hover:scale-105"
+                      className="bg-saffron-gradient text-white px-8 py-3.5 rounded-xl font-bold shadow-medium hover:scale-105 transition-all duration-300 btn-hover"
                     >
-                      Buy Credits First
+                      Browse Carbon Projects
                     </button>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="space-y-6">
-                      <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <Info className="h-5 w-5 text-blue-600" />
-                          <h4 className="font-medium text-blue-900">Selling Credits</h4>
+                      <div className="bg-gradient-to-br from-teal-50 to-cyan-50/50 p-5 rounded-2xl border border-teal/20 shadow-soft">
+                        <div className="flex items-center space-x-2.5 mb-2.5">
+                          <Info className="h-5 w-5 text-teal-700" />
+                          <h4 className="font-bold text-teal-900">Selling Credits</h4>
                         </div>
-                        <p className="text-sm text-blue-700">
-                          List your carbon credits for sale on our marketplace. Set your own price and let other users purchase them.
+                        <p className="text-sm text-gray-700 leading-relaxed font-medium">
+                          List your carbon credits in the global EcoTrade marketplace. Set your target price per credit and sell directly to other eco-conscious buyers.
                         </p>
                       </div>
 
-                      <div className="space-y-4">
+                      <div className="space-y-5">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Select Project Credits *
                           </label>
                           <select
                             value={selectedSellProject}
-                            onChange={(e) => setSelectedSellProject(e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                            onChange={(e) => {
+                              setSelectedSellProject(e.target.value)
+                              const selected = userCredits.find(c => c.project.id === e.target.value)
+                              if (selected) {
+                                setSellPrice(selected.project.price_per_credit)
+                              }
+                            }}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus-ring outline-none transition-all duration-300 bg-white"
                           >
                             <option value="">Choose credits to sell...</option>
                             {userCredits.map((credit) => (
@@ -677,7 +729,7 @@ export function Dashboard() {
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Quantity to Sell *
                           </label>
                           <input
@@ -686,60 +738,63 @@ export function Dashboard() {
                             max={userCredits.find(c => c.project.id === selectedSellProject)?.quantity || 0}
                             value={sellQuantity}
                             onChange={(e) => setSellQuantity(parseInt(e.target.value) || 1)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus-ring outline-none transition-all duration-300"
                             placeholder="Enter quantity"
                           />
                           {selectedSellProject && (
-                            <p className="text-xs text-gray-500 mt-1">
-                              Available: {userCredits.find(c => c.project.id === selectedSellProject)?.quantity || 0} credits
+                            <p className="text-xs text-teal font-bold mt-2.5">
+                              Available balance: {userCredits.find(c => c.project.id === selectedSellProject)?.quantity || 0} credits
                             </p>
                           )}
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Price per Credit ($) *
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Price per Credit (₹) *
                           </label>
                           <input
                             type="number"
-                            min="0.01"
-                            step="0.01"
+                            min="1"
                             value={sellPrice}
                             onChange={(e) => setSellPrice(parseFloat(e.target.value) || 0)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus-ring outline-none transition-all duration-300"
                             placeholder="Set your price"
                           />
                           {selectedSellProject && (
-                            <p className="text-xs text-gray-500 mt-1">
-                              Market price: ${userCredits.find(c => c.project.id === selectedSellProject)?.project.price_per_credit || 0}
+                            <p className="text-xs text-gray-500 mt-2.5 font-medium">
+                              Original market price: ₹{userCredits.find(c => c.project.id === selectedSellProject)?.project.price_per_credit || 0}
                             </p>
                           )}
                         </div>
                         
                         {selectedSellProject && sellQuantity > 0 && sellPrice > 0 && (
-                          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                            <h4 className="font-medium text-blue-900 mb-2">Sale Summary</h4>
-                            <div className="space-y-1 text-sm">
-                              <p className="text-gray-600">
-                                Project: <span className="font-medium text-gray-900">
+                          <div className="bg-teal-50/60 backdrop-blur-sm p-5 rounded-2xl border border-teal-200/60 shadow-soft animate-slide-up">
+                            <h4 className="font-bold text-teal-950 mb-3">Listing Summary</h4>
+                            <div className="space-y-2 text-sm font-medium">
+                              <div className="flex justify-between border-b border-teal/10 pb-1.5">
+                                <span className="text-gray-600">Project:</span>
+                                <span className="text-gray-900 font-bold">
                                   {userCredits.find(c => c.project.id === selectedSellProject)?.project.name}
                                 </span>
-                              </p>
-                              <p className="text-gray-600">
-                                Quantity: <span className="font-medium text-blue-600">
+                              </div>
+                              <div className="flex justify-between border-b border-teal/10 pb-1.5">
+                                <span className="text-gray-600">Quantity:</span>
+                                <span className="text-teal-700 font-bold">
                                   {sellQuantity} credits
                                 </span>
-                              </p>
-                              <p className="text-gray-600">
-                                Price per credit: <span className="font-medium text-blue-600">
+                              </div>
+                              <div className="flex justify-between border-b border-teal/10 pb-1.5">
+                                <span className="text-gray-600">Listing Price per credit:</span>
+                                <span className="text-teal-700 font-bold">
                                   ₹{sellPrice.toLocaleString('en-IN')}
                                 </span>
-                              </p>
-                              <p className="text-gray-600">
-                                Total Value: <span className="font-bold text-blue-600 text-lg">
+                              </div>
+                              <div className="flex justify-between pt-1">
+                                <span className="text-gray-900 font-bold text-base">Total Value:</span>
+                                <span className="text-teal font-extrabold text-lg">
                                   ₹{(sellPrice * sellQuantity).toLocaleString('en-IN')}
                                 </span>
-                              </p>
+                              </div>
                             </div>
                           </div>
                         )}
@@ -747,17 +802,17 @@ export function Dashboard() {
                         <button
                           onClick={handleSellCredits}
                           disabled={!selectedSellProject || sellQuantity <= 0 || sellPrice <= 0 || loading}
-                          className="w-full bg-gradient-to-r from-teal to-cyan-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 transform hover:scale-105"
+                          className="w-full bg-teal-gradient text-white py-4 px-6 rounded-xl font-bold shadow-medium hover:shadow-strong transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 transform hover:scale-105 btn-hover"
                         >
                           {loading ? (
                             <>
                               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                              <span>Listing...</span>
+                              <span>Listing on Market...</span>
                             </>
                           ) : (
                             <>
                               <DollarSign className="h-5 w-5" />
-                              <span>List for Sale</span>
+                              <span>List Credits for Sale</span>
                             </>
                           )}
                         </button>
@@ -765,19 +820,22 @@ export function Dashboard() {
                     </div>
                     
                     <div className="space-y-4">
-                      <h4 className="font-medium text-gray-900">Your Available Credits</h4>
-                      <div className="space-y-4 max-h-96 overflow-y-auto">
+                      <h4 className="font-bold text-gray-900 text-lg flex items-center space-x-2">
+                        <span className="w-2 h-4 bg-teal rounded-full inline-block"></span>
+                        <span>Your Available Credits</span>
+                      </h4>
+                      <div className="space-y-4 max-h-128 overflow-y-auto pr-2">
                         {userCredits.map((credit) => (
-                          <div key={credit.project.id} className="p-4 border rounded-lg hover:border-blue-300 transition-colors">
+                          <div key={credit.project.id} className="p-5 bg-white border border-gray-100 rounded-2xl shadow-soft hover:border-teal/30 transition-all duration-300 card-hover">
                             <div className="flex justify-between items-start mb-2">
-                              <h5 className="font-semibold text-gray-900">{credit.project.name}</h5>
-                              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
+                              <h5 className="font-bold text-gray-900 text-base">{credit.project.name}</h5>
+                              <span className="bg-teal/10 text-teal-800 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
                                 {credit.quantity} credits
                               </span>
                             </div>
-                            <p className="text-sm text-gray-600 mb-3">{credit.project.description}</p>
-                            <div className="flex justify-between items-center">
-                              <span className="text-gray-500 text-sm">
+                            <p className="text-sm text-gray-600 mb-4 leading-relaxed font-medium">{credit.project.description}</p>
+                            <div className="flex justify-between items-center pt-2 border-t border-gray-50">
+                              <span className="text-gray-500 text-sm font-semibold">
                                 Market: ₹{credit.project.price_per_credit.toLocaleString('en-IN')}/credit
                               </span>
                               <button
@@ -785,9 +843,9 @@ export function Dashboard() {
                                   setSelectedSellProject(credit.project.id)
                                   setSellPrice(credit.project.price_per_credit)
                                 }}
-                                className="text-blue-600 hover:text-blue-700 font-medium text-sm"
+                                className="bg-teal/10 text-teal hover:bg-teal hover:text-white px-4 py-2 rounded-xl font-bold text-sm transition-all duration-300"
                               >
-                                Select to Sell
+                                Select
                               </button>
                             </div>
                           </div>
@@ -800,118 +858,126 @@ export function Dashboard() {
             )}
 
             {activeTab === 'marketplace' && (
-              <div className="space-y-6">
-                <div className="flex items-center space-x-2 mb-4">
-                  <CreditCard className="h-6 w-6 text-purple-600" />
-                  <h3 className="text-lg font-semibold">Credit Marketplace</h3>
+              <div className="space-y-8 animate-fade-scale">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className="bg-royal-blue/10 p-2.5 rounded-xl">
+                    <CreditCard className="h-6 w-6 text-royal-blue" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Carbon Credit Marketplace</h3>
                 </div>
 
                 {saleOrders.length === 0 ? (
-                  <div className="text-center py-12">
-                    <CreditCard className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">No Credits for Sale</h3>
-                    <p className="text-gray-600">
-                      Be the first to list credits for sale on the marketplace!
+                  <div className="text-center py-16 bg-white rounded-3xl border border-gray-100 shadow-soft">
+                    <CreditCard className="h-20 w-20 text-gray-300 mx-auto mb-4 animate-float" />
+                    <h3 className="text-2xl font-extrabold text-gray-900 mb-2">No Listings Right Now</h3>
+                    <p className="text-gray-600 font-medium">
+                      Be the first to list carbon credits for sale on the peer-to-peer marketplace!
                     </p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {saleOrders.map((order) => (
-                      <div key={order.id} className="bg-white border rounded-xl p-6 hover:shadow-lg transition-shadow">
-                        <div className="flex justify-between items-start mb-4">
-                          <div>
-                            <h4 className="font-semibold text-gray-900">{order.projects?.name}</h4>
-                            <p className="text-sm text-gray-500">by {order.profiles?.name}</p>
+                      <div key={order.id} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-soft hover:shadow-strong transition-all duration-300 card-hover flex flex-col justify-between">
+                        <div>
+                          <div className="flex justify-between items-start mb-4">
+                            <div>
+                              <h4 className="font-bold text-gray-900 text-base">{order.projects?.name}</h4>
+                              <p className="text-xs text-gray-500 font-semibold mt-0.5">Seller: {order.profiles?.name}</p>
+                            </div>
+                            <span className="bg-teal/10 text-teal-800 px-3 py-1 rounded-full text-xs font-bold tracking-wide">
+                              {order.quantity} credits
+                            </span>
                           </div>
-                          <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
-                            {order.quantity} credits
-                          </span>
+                          
+                          <p className="text-sm text-gray-600 mb-4 leading-relaxed font-medium">{order.projects?.description}</p>
                         </div>
                         
-                        <p className="text-sm text-gray-600 mb-4">{order.projects?.description}</p>
-                        
-                        <div className="space-y-2 mb-4">
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-500">Price per credit:</span>
-                            <span className="font-medium">₹{order.price_per_credit.toLocaleString('en-IN')}</span>
+                        <div>
+                          <div className="space-y-2 mb-5 pt-3 border-t border-gray-50">
+                            <div className="flex justify-between text-sm font-medium">
+                              <span className="text-gray-500">Price per credit:</span>
+                              <span className="font-bold text-gray-900">₹{order.price_per_credit.toLocaleString('en-IN')}</span>
+                            </div>
+                            <div className="flex justify-between text-sm font-medium items-center">
+                              <span className="text-gray-500">Total value:</span>
+                              <span className="font-extrabold text-lg text-saffron">₹{order.total_value.toLocaleString('en-IN')}</span>
+                            </div>
                           </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-500">Total value:</span>
-                            <span className="font-bold text-lg text-saffron">₹{order.total_value.toLocaleString('en-IN')}</span>
-                          </div>
+                          
+                          <button
+                            onClick={() => handleBuyFromMarketplace(order)}
+                            disabled={loading || order.seller_id === user?.id}
+                            className="w-full bg-royal-gradient text-white py-3 px-4 rounded-xl font-bold shadow-medium hover:shadow-strong transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-103 btn-hover"
+                          >
+                            {order.seller_id === user?.id ? 'Your Listing' : 'Buy Now'}
+                          </button>
                         </div>
-                        
-                        <button
-                          onClick={() => handleBuyFromMarketplace(order)}
-                          disabled={loading || order.seller_id === user?.id}
-                          className="w-full bg-gradient-to-r from-royal-blue to-indigo-600 text-white py-2 px-4 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
-                        >
-                          {order.seller_id === user?.id ? 'Your Listing' : 'Buy Now'}
-                        </button>
                       </div>
                     ))}
                   </div>
                 )}
               </div>
             )}
-
-            {activeTab === 'transactions' && (
-              <div className="space-y-6">
-                <h3 className="text-lg font-semibold">Transaction History</h3>
+             {activeTab === 'transactions' && (
+              <div className="space-y-8 animate-fade-scale">
+                <h3 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
+                  <span className="w-2.5 h-6 bg-saffron rounded-full inline-block"></span>
+                  <span>Transaction History</span>
+                </h3>
                 
                 {transactions.length === 0 ? (
-                  <div className="text-center py-12">
-                    <Calculator className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">No Transactions Yet</h3>
-                    <p className="text-gray-600">
-                      Start buying or selling carbon credits to see your transaction history.
+                  <div className="text-center py-16 bg-white rounded-3xl border border-gray-100 shadow-soft">
+                    <Calculator className="h-20 w-20 text-gray-300 mx-auto mb-4 animate-float" />
+                    <h3 className="text-2xl font-extrabold text-gray-900 mb-2">No Transactions Yet</h3>
+                    <p className="text-gray-600 font-medium">
+                      Your ledger is currently empty. Buy or list carbon credits to begin.
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-white rounded-lg border overflow-hidden">
+                  <div className="bg-white rounded-2xl border border-gray-100 shadow-soft overflow-hidden">
                     <div className="overflow-x-auto">
-                      <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
+                      <table className="min-w-full divide-y divide-gray-100">
+                        <thead className="bg-gray-50/70 text-gray-700">
                           <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                               Date
                             </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                               Project
                             </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                               Type
                             </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                               Quantity
                             </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                               Total Cost
                             </th>
                           </tr>
                         </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
+                        <tbody className="bg-white divide-y divide-gray-100 text-sm font-semibold text-gray-800">
                           {transactions.map((transaction) => (
-                            <tr key={transaction.id} className="hover:bg-gray-50">
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <tr key={transaction.id} className="hover:bg-cream-50/40 transition-colors">
+                              <td className="px-6 py-4 whitespace-nowrap text-gray-500">
                                 {new Date(transaction.created_at).toLocaleDateString()}
                               </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              <td className="px-6 py-4 whitespace-nowrap text-gray-900">
                                 {transaction.projects?.name || 'Unknown Project'}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
-                                <span className={`px-2 py-1 text-xs rounded-full font-medium ${
+                                <span className={`px-3 py-1 text-xs rounded-full font-bold uppercase tracking-wider ${
                                   transaction.type === 'buy' 
-                                    ? 'bg-saffron/10 text-saffron' 
-                                    : 'bg-teal/10 text-teal'
+                                    ? 'bg-saffron/10 text-saffron-800 border border-saffron/20' 
+                                    : 'bg-teal/10 text-teal-800 border border-teal/20'
                                 }`}>
-                                  {transaction.type.toUpperCase()}
+                                  {transaction.type}
                                 </span>
                               </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              <td className="px-6 py-4 whitespace-nowrap">
                                 {transaction.quantity} credits
                               </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              <td className="px-6 py-4 whitespace-nowrap text-gray-900 font-extrabold">
                                 ₹{transaction.total_cost.toLocaleString('en-IN')}
                               </td>
                             </tr>
@@ -925,45 +991,66 @@ export function Dashboard() {
             )}
 
             {activeTab === 'impact' && (
-              <div className="space-y-6">
-                <h3 className="text-lg font-semibold">Your Environmental Impact</h3>
+              <div className="space-y-8 animate-fade-scale">
+                <h3 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
+                  <span className="w-2.5 h-6 bg-teal rounded-full inline-block"></span>
+                  <span>Your Environmental Impact</span>
+                </h3>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-medium mb-4">Monthly Activity</h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-soft">
+                    <h4 className="font-bold text-gray-900 mb-6 text-lg">Monthly Offsets (tons CO₂)</h4>
                     <ResponsiveContainer width="100%" height={300}>
-                      <BarChart data={chartData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Bar dataKey="offset" fill="#FF9933" />
+                      <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#f5f5f5" />
+                        <XAxis dataKey="name" stroke="#888888" fontSize={11} tickLine={false} />
+                        <YAxis stroke="#888888" fontSize={11} tickLine={false} />
+                        <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #FF9933' }} />
+                        <Bar dataKey="offset" fill="#FF9933" radius={[4, 4, 0, 0]} maxBarSize={45}>
+                          {chartData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.offset >= 0 ? '#FF9933' : '#006666'} />
+                          ))}
+                        </Bar>
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
                   
-                  <div className="space-y-4">
-                    <h4 className="font-medium">Impact Equivalents</h4>
-                    <div className="space-y-3">
-                      <div className="p-4 bg-saffron/10 rounded-lg border border-saffron/20">
-                        <div className="text-2xl font-bold text-saffron">
-                          {Math.round((profile?.total_co2_offset || 0) * 2.5).toLocaleString('en-IN')}
+                  <div className="space-y-6">
+                    <h4 className="font-bold text-gray-900 text-lg flex items-center space-x-2">
+                      <span>Equivalent Environmental Gains</span>
+                    </h4>
+                    <div className="space-y-4">
+                      <div className="p-5 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-200/50 shadow-soft flex items-center justify-between card-hover">
+                        <div>
+                          <div className="text-3xl font-extrabold text-green-950">
+                            {Math.round((profile?.total_co2_offset || 0) * 2.5).toLocaleString('en-IN')}
+                          </div>
+                          <div className="text-sm font-bold text-green-800 mt-1">Trees Planted & Grown</div>
+                          <p className="text-xs text-green-600/80 mt-0.5">Equivalent lifetime CO₂ absorption of mature native trees</p>
                         </div>
-                        <div className="text-sm text-gray-600">Trees planted equivalent</div>
+                        <div className="text-4xl">🌳</div>
                       </div>
                       
-                      <div className="p-4 bg-teal/10 rounded-lg border border-teal/20">
-                        <div className="text-2xl font-bold text-teal">
-                          {Math.round((profile?.total_co2_offset || 0) * 2600).toLocaleString('en-IN')}
+                      <div className="p-5 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl border border-teal-200/50 shadow-soft flex items-center justify-between card-hover">
+                        <div>
+                          <div className="text-3xl font-extrabold text-teal-950">
+                            {Math.round((profile?.total_co2_offset || 0) * 2600).toLocaleString('en-IN')}
+                          </div>
+                          <div className="text-sm font-bold text-teal-800 mt-1">Passenger Vehicle Miles Saved</div>
+                          <p className="text-xs text-teal-600/80 mt-0.5">Equivalent emissions of average petrol vehicles avoided</p>
                         </div>
-                        <div className="text-sm text-gray-600">Miles driven offset</div>
+                        <div className="text-4xl">🚗</div>
                       </div>
                       
-                      <div className="p-4 bg-royal-blue/10 rounded-lg border border-royal-blue/20">
-                        <div className="text-2xl font-bold text-royal-blue">
-                          {Math.round((profile?.total_co2_offset || 0) * 1200).toLocaleString('en-IN')}
+                      <div className="p-5 bg-gradient-to-br from-indigo-50 to-royal-blue-50 rounded-2xl border border-indigo-200/50 shadow-soft flex items-center justify-between card-hover">
+                        <div>
+                          <div className="text-3xl font-extrabold text-royal-blue">
+                            {Math.round((profile?.total_co2_offset || 0) * 1200).toLocaleString('en-IN')}
+                          </div>
+                          <div className="text-sm font-bold text-royal-blue-800 mt-1">Clean Energy Generated (kWh)</div>
+                          <p className="text-xs text-royal-blue-600/80 mt-0.5">Equivalent solar or wind grid output for typical homes</p>
                         </div>
-                        <div className="text-sm text-gray-600">kWh of clean energy</div>
+                        <div className="text-4xl">⚡</div>
                       </div>
                     </div>
                   </div>
